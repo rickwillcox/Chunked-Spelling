@@ -1,6 +1,6 @@
 const defaultColorScheme = ["#636261", "#AEC6CF", "#F4A460"];
 
-const wordsToChange = {
+let wordsToChange = {
   accommodate: "ac-com-mo-date",
   accommodation: "ac-com-mo-da-tion",
   amateur: "am-ate-ur",
@@ -58,18 +58,46 @@ const wordsToChange = {
   vacuum: "vac-u-um",
 };
 
-const originalBody = document.body.cloneNode(true);
+chrome.storage.local.get("wordList", function (data) {
+  if (data.wordList) {
+    wordsToChange = data.wordList;
+    console.log(wordsToChange);
+    // Use the wordList array here
+  }
+});
 
-chrome.storage.sync.get("colorScheme", (data) => {
+const originalBody = document.body.cloneNode(true);
+console.log("!@#!@#!@!#@");
+chrome.storage.local.get("colorScheme", (data) => {
   const colorScheme = data.colorScheme || defaultColorScheme;
   replaceWordsInPage(colorScheme);
 });
 
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  if (request.message === "Hello world") {
+    console.log(request.message);
+  }
+});
+
 chrome.storage.onChanged.addListener((changes, area) => {
-  if (area === "sync" && changes.colorScheme) {
+  if (area === "local" && changes.colorScheme) {
     const colorScheme = changes.colorScheme.newValue;
+    console.log("colorScheme changes", colorScheme);
     document.body = originalBody.cloneNode(true);
     replaceWordsInPage(colorScheme);
+  }
+});
+
+chrome.storage.onChanged.addListener(function (changes, areaName) {
+  if (areaName === "local" && "wordList" in changes) {
+    wordsToChange = changes.wordList.newValue;
+    console.log("wordList changes", changes.wordList.newValue);
+
+    document.body = originalBody.cloneNode(true);
+    chrome.storage.local.get("colorScheme", (data) => {
+      const colorScheme = data.colorScheme || defaultColorScheme;
+      replaceWordsInPage(colorScheme);
+    });
   }
 });
 

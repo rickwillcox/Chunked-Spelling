@@ -52,6 +52,50 @@
         padding: 4px 8px;
         border-radius: 6px;
       }
+
+      h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      li {
+        margin-bottom: 5px;
+      }
+
+      input[type="text"] {
+        width: 200px;
+        margin-right: 10px;
+        padding: 5px;
+        font-size: 14px;
+      }
+
+      button {
+        padding: 5px 10px;
+        font-size: 14px;
+      }
+
+      .dialog {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
     </style>
     <title>Chunked Spelling</title>
   </head>
@@ -59,9 +103,44 @@
     <form
       class="color-form"
       id="color-scheme-form"
-    >
-      <!-- The color schemes will be added here by the script -->
-    </form>
+    ></form>
     <script src="popup.js"></script>
+  </body>
+  <body>
+    <h1>Word List Editor</h1>
+    <p>Current word list:</p>
+    <ul class="word-list"></ul>
+    <div class="controls">
+      <button class="add-btn">Add Word</button>
+      <button class="reset-btn">Reset to Default</button>
+      <button class="delete-all-btn">Delete All Words</button>
+    </div>
+    <div class="dialog edit-dialog">
+      <h2>Edit Word</h2>
+      <input
+        type="text"
+        class="edit-word-input"
+      />
+      <input
+        type="text"
+        class="edit-replacement-input"
+      />
+      <button class="edit-save-btn">Save</button>
+      <button class="edit-cancel-btn">Cancel</button>
+    </div>
+    <div class="dialog add-dialog">
+      <h2>Add Word</h2>
+      <input
+        type="text"
+        class="add-word-input"
+      />
+      <input
+        type="text"
+        class="add-replacement-input"
+      />
+      <button class="add-save-btn">Save</button>
+      <button class="add-cancel-btn">Cancel</button>
+    </div>
+    <script src="popup-dialog.js"></script>
   </body>
 </html>

@@ -47,22 +47,8 @@ function changeTitleScheme(schemeIndex) {
 }
 
 function saveColorScheme(schemeIndex) {
-  chrome.storage.sync.set({ colorScheme: colorSchemes[schemeIndex] }, () => {
-    changeTitleScheme(schemeIndex);
-  });
-}
-
-function loadColorScheme() {
-  chrome.storage.sync.get("colorScheme", (data) => {
-    const scheme = data.colorScheme || colorSchemes[0];
-    const schemeIndex = colorSchemes.findIndex((s) => s === scheme);
-    if (schemeIndex !== -1) {
-      const radioButton = document.getElementById(
-        `color-scheme-${schemeIndex}`
-      );
-      radioButton.checked = true;
-    }
-  });
+  chrome.storage.local.set({ colorScheme: colorSchemes[schemeIndex] });
+  changeTitleScheme(schemeIndex);
 }
 
 const titleSplit = [
@@ -120,5 +106,5 @@ document.addEventListener("DOMContentLoaded", () => {
     form.appendChild(div);
   });
 
-  loadColorScheme();
+  // loadColorScheme();
 });
