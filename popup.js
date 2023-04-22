@@ -29,6 +29,8 @@ const colorSchemes = [
   ["#525252", "#FFE082", "#FFECB3"],
   ["#595959", "#E6EE9C", "#F0F4C3"],
   ["#555555", "#FF8A65", "#FFAB91"],
+  ["#383838", "#9AD2FC", "#C2E2FC"],
+  ["#404040", "#98C1D9", "#C9DCE3"],
 ];
 
 function changeTitleScheme(schemeIndex) {

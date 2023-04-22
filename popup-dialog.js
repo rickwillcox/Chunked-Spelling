@@ -38,11 +38,14 @@ function init() {
     });
 
   document.addEventListener("click", function (event) {
-    if (event.target.classList.contains("delete-btn")) {
-      const word = event.target.getAttribute("data-word");
+    const deleteButton = event.target.closest(".delete-btn");
+    const editButton = event.target.closest(".edit-btn");
+
+    if (deleteButton) {
+      const word = deleteButton.getAttribute("data-word");
       deleteWord(word);
-    } else if (event.target.classList.contains("edit-btn")) {
-      const word = event.target.getAttribute("data-word");
+    } else if (editButton) {
+      const word = editButton.getAttribute("data-word");
       showEditDialog(word);
     }
   });
@@ -88,14 +91,24 @@ function displayWordList() {
   const wordListElem = document.querySelector(".word-list");
   wordListElem.innerHTML = "";
   for (const [word, replacement] of Object.entries(wordList)) {
-    const wordElem = document.createElement("li");
+    const wordElem = document.createElement("tr");
     wordElem.innerHTML = `
-      <span class="word">${word}</span>
-      <span class="separator">:</span>
-      <span class="replacement">${replacement}</span>
-      <button class="edit-btn" data-word="${word}">Edit</button>
-      <button class="delete-btn" data-word="${word}">Delete</button>
-    `;
+          <td class="word">${word}</td>
+          <td class="separator">:</td>
+          <td class="replacement">${replacement}</td>
+          <td class="action-icons">
+            <button class="edit-btn" data-word="${word}">
+              <div class="icon-container">
+                <img src="Pen.png" alt="Edit" />
+              </div>
+            </button>
+            <button class="delete-btn" data-word="${word}">
+              <div class="icon-container">
+                <img src="trash-alt.png" alt="Delete" />
+              </div>
+            </button>
+          </td>
+        `;
     wordListElem.appendChild(wordElem);
   }
 }
@@ -111,6 +124,13 @@ function showEditDialog(word) {
   document.querySelector(".edit-word-input").value = word;
   document.querySelector(".edit-replacement-input").value = replacement;
   showDialog(".edit-dialog");
+}
+
+function positionAddDialog(target) {
+  const addDialog = document.querySelector(".add-dialog");
+  const rect = target.getBoundingClientRect();
+  addDialog.style.top = rect.top + window.scrollY + "px";
+  addDialog.style.left = rect.left + window.scrollX + "px";
 }
 
 function editWord(word, replacement) {
