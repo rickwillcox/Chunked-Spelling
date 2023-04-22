@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <style>
+      body {
+        background-color: #302d2d;
+        color: white;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        display: inline-block;
+        margin: 0;
+        width: 320px;
+      }
+      h1 {
+        font-size: 24px;
+        margin-bottom: 15px;
+      }
+      .color-form {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .color-scheme {
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
+
+      .color-square {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+      }
+      .title {
+        display: flex;
+        gap: 20px;
+        align-self: center;
+      }
+
+      .title-word {
+        text-align: center;
+        padding: 4px 8px;
+        border-radius: 6px;
+      }
+    </style>
+    <title>Chunked Spelling</title>
+  </head>
+  <body>
+    <form
+      class="color-form"
+      id="color-scheme-form"
+    >
+      <!-- The color schemes will be added here by the script -->
+    </form>
+    <script src="popup.js"></script>
+  </body>
+</html>
