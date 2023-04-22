@@ -15,6 +15,7 @@
         display: inline-block;
         margin: 0;
         width: 500px;
+        text-align: center;
       }
       h1 {
         font-size: 24px;
@@ -101,12 +102,6 @@
         align-items: center;
         margin-bottom: 5px;
       }
-      .word-list-title {
-        margin-right: 75px;
-        margin-left: 75px;
-        align-self: center;
-      }
-
       table {
         width: 100%;
         border-collapse: collapse;
@@ -173,14 +168,17 @@
       .delete-btn img {
         height: 16px;
         width: 16px;
-        /* object-fit: scale-down; */
         pointer-events: none;
       }
 
       .add-dialog {
         position: absolute;
+        background-color: #302d2d;
+        padding: 10px;
+        gap: 10px;
       }
       .edit-dialog {
+        position: absolute;
         background-color: #302d2d;
         padding: 10px;
         gap: 10px;
@@ -227,6 +225,7 @@
       <button class="add-save-btn">Save</button>
       <button class="add-cancel-btn">Cancel</button>
     </div>
+
     <script src="popup-dialog.js"></script>
   </body>
 </html>

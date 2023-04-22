@@ -5,6 +5,55 @@ const wordsToChange = {
   appropriate: "ap-pro-pri-ate",
   assassin: "ass-ass-in",
   assessment: "as-sess-ment",
+  biography: "bio-graph-y",
+  calendar: "cal-en-dar",
+  cannabis: "can-na-bis",
+  commission: "com-miss-ion",
+  committed: "com-mit-ted",
+  conscientious: "con-sci-en-ti-ous",
+  consensus: "con-sen-sus",
+  convenient: "con-ven-i-ent",
+  definitely: "de-fin-ite-ly",
+  exhilarate: "ex-hil-a-rate",
+  fiery: "fi-er-y",
+  guarantee: "gu-aran-tee",
+  harass: "har-ass",
+  hierarchy: "hi-er-arch-y",
+  immediate: "im-med-i-ate",
+  indispensable: "in-dis-pens-able",
+  jewelry: "jewel-ry",
+  judgment: "judg-ment",
+  leisure: "le-is-ure",
+  maintenance: "main-ten-ance",
+  maneuver: "man-eu-ver",
+  marijuana: "mar-i-ju-ana",
+  millennium: "mil-len-ni-um",
+  minuscule: "min-us-cule",
+  mischievous: "mis-chi-e-v-ous",
+  misspell: "mis-spell",
+  occasionally: "oc-ca-sion-al-ly",
+  occurred: "oc-cur-red",
+  occurrence: "oc-cur-r-ence",
+  parallel: "par-all-el",
+  perseverance: "per-se-ver-ance",
+  personnel: "per-son-nel",
+  possession: "pos-ses-sion",
+  precede: "pre-cede",
+  principal: "prin-cip-al",
+  privilege: "priv-i-lege",
+  pronunciation: "pro-nun-ci-a-tion",
+  questionnaire: "quest-ion-na-ire",
+  receipt: "re-ce-ipt",
+  referred: "re-fer-red",
+  separate: "sep-a-rate",
+  sergeant: "ser-ge-ant",
+  succinct: "suc-cin-ct",
+  supersede: "super-sed-e",
+  threshold: "thresh-old",
+  transparent: "trans-par-ent",
+  twelfth: "twe-l-f-th",
+  unnecessary: "un-ne-c-es-sary",
+  vacuum: "vac-u-um",
 };
 
 let wordList = {};
@@ -19,9 +68,12 @@ function init() {
     displayWordList();
   });
 
-  document.querySelector(".add-btn").addEventListener("click", function () {
-    showAddDialog();
-  });
+  document
+    .querySelector(".add-btn")
+    .addEventListener("click", function (event) {
+      positionAddDialog(event.target);
+      showAddDialog();
+    });
 
   document.querySelector(".reset-btn").addEventListener("click", function () {
     wordList = wordsToChange;
@@ -46,6 +98,7 @@ function init() {
       deleteWord(word);
     } else if (editButton) {
       const word = editButton.getAttribute("data-word");
+      positionEditDialog(event.target);
       showEditDialog(word);
     }
   });
@@ -129,8 +182,15 @@ function showEditDialog(word) {
 function positionAddDialog(target) {
   const addDialog = document.querySelector(".add-dialog");
   const rect = target.getBoundingClientRect();
-  addDialog.style.top = rect.top + window.scrollY + "px";
-  addDialog.style.left = rect.left + window.scrollX + "px";
+  addDialog.style.top = rect.top + window.scrollY - 150 + "px";
+  addDialog.style.left = rect.left + window.scrollX + 200 + "px";
+}
+
+function positionEditDialog(target) {
+  const addDialog = document.querySelector(".edit-dialog");
+  const rect = target.getBoundingClientRect();
+  addDialog.style.top = rect.top + window.scrollY - 109 + "px";
+  addDialog.style.left = rect.left + window.scrollX - 225 + "px";
 }
 
 function editWord(word, replacement) {

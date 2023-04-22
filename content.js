@@ -58,20 +58,17 @@ let wordsToChange = {
   vacuum: "vac-u-um",
 };
 
-chrome.storage.local.get("wordList", function (data) {
-  if (data.wordList) {
-    wordsToChange = data.wordList;
-    console.log(wordsToChange);
-    // Use the wordList array here
-  }
-});
-
 const originalBody = document.body.cloneNode(true);
-console.log("!@#!@#!@!#@");
 chrome.storage.local.get("colorScheme", (data) => {
   const colorScheme = data.colorScheme || defaultColorScheme;
   replaceWordsInPage(colorScheme);
 });
+
+// chrome.storage.local.get("wordList", function (data) {
+//   if (data.wordList) {
+//     wordsToChange = data.wordList;
+//   }
+// });
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.message === "Hello world") {
